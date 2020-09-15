@@ -1,4 +1,4 @@
-package xom.xian.mail.coupon;
+package com.xian.mail.coupon;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
