@@ -3,7 +3,10 @@ package com.xian.mail.member.controller;
 import java.util.Arrays;
 import java.util.Map;
 
+import com.xian.mail.member.feign.CouponFeignService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,11 +27,48 @@ import com.xian.common.utils.R;
  * @email li.shouxian@outlook.com
  * @date 2020-09-15 20:46:47
  */
+@RefreshScope
 @RestController
 @RequestMapping("member/member")
 public class MemberController {
     @Autowired
     private MemberService memberService;
+
+
+    @Autowired
+    CouponFeignService couponFeignService;
+
+
+    /**
+     * 测试请求
+     */
+    @RequestMapping("/test")
+    public R test(){
+        MemberEntity memberEntity = new MemberEntity();
+        memberEntity.setNickname("张三");
+        R r = couponFeignService.memberCoupons();
+        return R.ok().put("会员", memberEntity).put("优惠券",r.get("优惠券"));
+    }
+
+
+
+    @Value("${myuser.name}")
+    String name;
+
+    @Value("${myuser.age}")
+    Integer age;
+
+    /**
+     * 测试请求
+     */
+    @RequestMapping("/test1")
+    public R test1(){
+        return R.ok().put("会员", name).put("年龄",age);
+    }
+
+
+
+
 
     /**
      * 列表

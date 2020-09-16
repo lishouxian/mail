@@ -9,7 +9,8 @@ spring:
     password: 607590
   cloud:
     nacos:
-      server-addr: 101.200.199.217:8848
+      discovery:
+        server-addr: 101.200.199.217:8848
   application:
     name: product
 
