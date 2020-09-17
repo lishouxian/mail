@@ -44,8 +44,6 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
             return (menu1.getSort()==null?0:menu1.getSort()) - (menu2.getSort()==null?0:menu2.getSort());
         }).collect(Collectors.toList());
 
-
-
         return level1Menus;
     }
 
