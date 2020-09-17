@@ -1,5 +1,6 @@
 package com.xian.mail.product.controller;
 
+import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -37,8 +38,6 @@ public class CategoryController {
     @RequestMapping("/list/tree")
     public R list(){
         List<CategoryEntity> entities = categoryService.listWithTree();
-
-
         return R.ok().put("数据",entities);
     }
 
@@ -86,12 +85,42 @@ public class CategoryController {
 
     /**
      * 删除
+     * 获取请求体必须使用POST的请求方法
      */
     @RequestMapping("/delete")
     public R delete(@RequestBody Long[] catIds){
-		categoryService.removeByIds(Arrays.asList(catIds));
+        //检查当前菜单是否被引用
+
+		//categoryService.removeByIds(Arrays.asList(catIds));
+
+
+        categoryService.removeMenuByIds(Arrays.asList(catIds));
 
         return R.ok();
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
