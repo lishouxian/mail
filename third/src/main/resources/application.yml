@@ -1,0 +1,24 @@
+# mysql
+spring:
+  cloud:
+
+
+
+
+
+
+
+
+
+    nacos:
+      server-addr: 101.200.199.217:8848
+  application:
+    name: third
+
+
+
+
+server:
+  port: 30000
+
+
