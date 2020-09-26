@@ -38,7 +38,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
         List<CategoryEntity> level1Menus = entities.stream().filter(categoryEntity ->
              categoryEntity.getParentCid() == 0
         ).map((menu) -> {
-            menu.setChildrens(getChildrens(menu,entities));
+            menu.setChildren(getChildrens(menu,entities));
             return menu;
         }).sorted((menu1,menu2)->{
             return (menu1.getSort()==null?0:menu1.getSort()) - (menu2.getSort()==null?0:menu2.getSort());
@@ -55,7 +55,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
 
         List<CategoryEntity> childrens = all.stream().filter(categoryEntity -> categoryEntity.getParentCid() == root.getCatId()
         ).map(categoryEntity -> {
-            categoryEntity.setChildrens(getChildrens(categoryEntity, all));
+            categoryEntity.setChildren(getChildrens(categoryEntity, all));
             return categoryEntity;
         }).sorted((menu1, menu2) -> {
             return (menu1.getSort()==null?0:menu1.getSort()) - (menu2.getSort()==null?0:menu2.getSort());
@@ -71,6 +71,16 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
 
 
         baseMapper.deleteBatchIds(asList);
+    }
+
+    @Override
+    public Long[] findCatelogPath(Long catelogId) {
+
+        CategoryEntity byId = this.getById(catelogId);
+        Long parentCid = byId.getParentCid();
+        CategoryEntity byId1 = this.getById(parentCid);
+        Long parentCid1 = byId1.getParentCid();
+        return new Long[]{parentCid1, parentCid, catelogId};
     }
 
 }

@@ -52,7 +52,7 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>com.xian.mail</groupId>
+			<groupId>com.xian.mall</groupId>
 			<artifactId>common</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>

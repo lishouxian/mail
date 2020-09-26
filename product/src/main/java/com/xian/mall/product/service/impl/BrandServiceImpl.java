@@ -11,6 +11,7 @@ import com.xian.common.utils.Query;
 
 import com.xian.mall.product.entity.BrandEntity;
 import com.xian.mall.product.service.BrandService;
+import org.springframework.util.StringUtils;
 
 
 @Service("brandService")
@@ -18,12 +19,26 @@ public class BrandServiceImpl extends ServiceImpl<BrandDao, BrandEntity> impleme
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
-        IPage<BrandEntity> page = this.page(
-                new Query<BrandEntity>().getPage(params),
-                new QueryWrapper<BrandEntity>()
-        );
+        String key = (String) params.get("key");
+        if (StringUtils.isEmpty(key)){
+            IPage<BrandEntity> page = this.page(
+                    new Query<BrandEntity>().getPage(params),
+                    new QueryWrapper<BrandEntity>()
+            );
+            return new PageUtils(page);
+        }else {
 
-        return new PageUtils(page);
+            IPage<BrandEntity> page = this.page(
+                    new Query<BrandEntity>().getPage(params),
+                    new QueryWrapper<BrandEntity>().eq("brand_id",key).or().like("name",key)
+            );
+
+            return new PageUtils(page);
+
+        }
+
+
+
     }
 
 }
