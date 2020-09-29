@@ -2,6 +2,8 @@ package com.xian.mall.product.service.impl;
 
 import com.xian.mall.product.dao.CategoryDao;
 import com.xian.mall.product.entity.CategoryEntity;
+import com.xian.mall.product.service.CategoryBrandRelationService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,6 +22,8 @@ import com.xian.mall.product.service.CategoryService;
 @Service("categoryService")
 public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity> implements CategoryService {
 
+    @Autowired
+    CategoryBrandRelationService categoryBrandRelationService;
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
         IPage<CategoryEntity> page = this.page(
@@ -69,7 +73,6 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
     public void removeMenuByIds(List<Long> asList) {
         //TODO 1. 检查当前删除的菜单,是否被引用
 
-
         baseMapper.deleteBatchIds(asList);
     }
 
@@ -81,6 +84,12 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
         CategoryEntity byId1 = this.getById(parentCid);
         Long parentCid1 = byId1.getParentCid();
         return new Long[]{parentCid1, parentCid, catelogId};
+    }
+
+    @Override
+    public void updateDetial(CategoryEntity category) {
+        this.updateById(category);
+        categoryBrandRelationService.updateCategory(category.getCatId(),category.getName());
     }
 
 }

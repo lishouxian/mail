@@ -28,22 +28,18 @@ public class  CategoryBrandRelationController {
     @Autowired
     private CategoryBrandRelationService categoryBrandRelationService;
 
-//    /**
-//     * 列表
-//     */
-//
-//    @GetMapping("/catelog/list",meth)
-//    public R cateloglist(@RequestParam Map<String, Object> params){
-//        Long brandID = (Long) params.get("brandID");
-//        List<CategoryBrandRelationEntity> data = categoryBrandRelationService.list(
-//                new QueryWrapper<CategoryBrandRelationEntity>().eq("brand_id",brandID)
-//        );
-//
-//        return R.ok().put("data", data);
-//    }
 
+    /**
+     * 当前品牌的关联列表
+     */
+    @GetMapping("/catelog/list")
+    public R catelogList(@RequestParam("brandId") Long brandId){
 
-
+        List<CategoryBrandRelationEntity> data = categoryBrandRelationService.list(
+                new QueryWrapper<CategoryBrandRelationEntity>().eq("brand_id",brandId)
+        );
+        return R.ok().put("data", data);
+    }
 
 
 
@@ -52,14 +48,7 @@ public class  CategoryBrandRelationController {
      */
     @RequestMapping("/list")
     public R list(@RequestParam Map<String, Object> params){
-//        Long brandID = (Long) params.get("brandID");
-//        List<CategoryBrandRelationEntity> data = categoryBrandRelationService.list(
-//                new QueryWrapper<CategoryBrandRelationEntity>().eq("brand_id",brandID)
-//        );
-
         PageUtils page = categoryBrandRelationService.queryPage(params);
-
-
         return R.ok().put("page", page);
     }
 
@@ -79,7 +68,9 @@ public class  CategoryBrandRelationController {
      */
     @RequestMapping("/save")
     public R save(@RequestBody CategoryBrandRelationEntity categoryBrandRelation){
-		categoryBrandRelationService.save(categoryBrandRelation);
+
+
+		categoryBrandRelationService.saveDetail(categoryBrandRelation);
 
         return R.ok();
     }
