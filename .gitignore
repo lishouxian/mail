@@ -17,3 +17,6 @@ buildNumber.properties
 **/.idea
 **/.gitignore
 **/.iml
+
+**/**.iml
+/mallvue/node_modules
