@@ -1,16 +1,13 @@
 package com.xian.mall.product.vo;
 
-import com.baomidou.mybatisplus.annotation.TableId;
-import jdk.jfr.DataAmount;
+
 import lombok.Data;
 
 @Data
 public class AttrVo {
-
     /**
      * 属性id
      */
-    @TableId
     private Long attrId;
     /**
      * 属性名
@@ -49,12 +46,5 @@ public class AttrVo {
      */
     private Integer showDesc;
 
-    /**
-     * 分组ID
-     */
-    private Long groudId;
-
     private Long attrGroupId;
-
-
 }

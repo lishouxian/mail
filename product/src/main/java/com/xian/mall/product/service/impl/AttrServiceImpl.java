@@ -69,7 +69,7 @@ public class AttrServiceImpl extends ServiceImpl<AttrDao, AttrEntity> implements
 
         AttrAttrgroupRelationEntity relationEntity = new AttrAttrgroupRelationEntity();
 
-        relationEntity.setAttrGroupId(attrVo.getGroudId());
+        relationEntity.setAttrGroupId(attrVo.getAttrGroupId());
         relationEntity.setAttrId(attrVo.getAttrId());
 
         relationDao.insert(relationEntity);
