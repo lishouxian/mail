@@ -28,7 +28,7 @@ public class MallESConfig {
     public RestHighLevelClient esRestClient(){
         RestHighLevelClient client = new RestHighLevelClient(
                 RestClient.builder(
-                        new HttpHost("101.200.199.217", 9200, "http")
+                        new HttpHost("47.103.199.145", 9200, "http")
                 )
         );
 
