@@ -13,7 +13,6 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
  */
 
 @EnableFeignClients(basePackages = "com.xian.mall.product.feign")
-
 @MapperScan("com.xian.mall.product.dao")
 @SpringBootApplication
 public class ProductApplication {
